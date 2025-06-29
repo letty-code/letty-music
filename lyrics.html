@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Lyrics Viewer | Lyric Explorer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="enhanced-style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="navbar">
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="Bio.html">BIO</a></li>
+        <li><a href="videos.html">VIDEOS</a></li>
+        <li><a href="About.html">ABOUT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="logo-center">
+    <img src="images/audio-waves.png" class="logo-img" alt="Logo" />
+    <h1>Lyric Explorer</h1>
+    <p class="tagline">Lyrics Discovery & Analysis</p>
+  </section>
+
+  <main class="main-grid">
+    <section class="lyrics-section">
+      <div class="card">
+        <h2 id="fileName">Song Title</h2>
+        <div class="scroll-box displayBox" id="fileContent">Select a song on the right to view lyrics.</div>
+      </div>
+      <div class="card">
+        <p>
+          <a href="https://www.youtube.com/@maneskinofficial" target="_blank">🎥 Måneskin Official</a> |
+          <a href="https://genius.com/artists/Maneskin" target="_blank">📜 More Lyrics</a> |
+          <a href="https://www.azlyrics.com/lyrics/maneskin/iwannabeyourslave.html" target="_blank">🎧 Discover More</a>
+        </p>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="card">
+        <h3>Search</h3>
+        <input type="text" id="keyword" placeholder="Search for word(s)..." />
+        <button onclick="performMark()">Search</button>
+        <div id="searchstat"></div>
+      </div>
+
+      <div class="card">
+        <h3>Select a Song</h3>
+        <ul>
+          <li><a href="#" onclick="loadBook('AliceInWonderland.txt','CORALINE - Måneskin')">CORALINE - Måneskin</a></li>
+          <li><a href="#" onclick="loadBook('JekyllAndHyde.txt','GOSSIP - Måneskin')">GOSSIP - Måneskin</a></li>
+          <li><a href="#" onclick="loadBook('LOTR.txt','I WANNA BE YOUR SLAVE - Måneskin')">I WANNA BE YOUR SLAVE - Måneskin</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Most Used Words</h3>
+        <ul id="mostUsed"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Least Used Words</h3>
+        <ul id="leastUsed"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Document Stats</h3>
+        <ul>
+          <li id="docLength"></li>
+          <li id="wordCount"></li>
+          <li id="charCount"></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <ul>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Log In</a></li>
+      <li><a href="#">Sign In</a></li>
+    </ul>
+  </footer>
+
+  <template id="template-ul-items">
+    <li>{{val}}</li>
+  </template>
+
+  <script>
+    const originalGetDocStats = getDocStats;
+    getDocStats = function(fileContent) {
+      originalGetDocStats(fileContent);
+      // Add character count (excluding HTML <br> tags)
+      const charCount = document.getElementById("charCount");
+      const strippedText = fileContent.replace(/<br\s*\/?>/gi, "");
+      charCount.innerText = "Character Count: " + strippedText.length;
+    }
+  </script>
+  <script src="searchsting.js"></script>
+</body>
+</html>
+
